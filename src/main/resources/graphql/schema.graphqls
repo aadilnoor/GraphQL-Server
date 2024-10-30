@@ -1,15 +1,19 @@
 type Product{
 	
 	id:ID,
-	
 	name:String,
-
 	category:String,
-
 	price:Float,
-
 	stock:Int
 
+}
+
+input ProductDTO {
+	
+	name:String,
+	category:String,
+	price:Float,
+	stock:Int
 }
 
 type User {
@@ -23,10 +27,10 @@ type User {
 }
 
 input UserDTO {
-  name: String
-  phone: String
-  email: String
-  password: String
+  name:String
+  phone:String
+  email:String
+  password:String
 }
 
 
@@ -50,6 +54,8 @@ type Query {
 
 type Mutation{
 
+	createProduct(productDTO:ProductDTO):Product
+	updateProduct(productDTO:ProductDTO ,id:ID!):Product
 	updateStock(id:ID!,stock:Int):Product 
 	updateStockShipment(id:ID!,stock:Int):Product
 	deleteProductById(id:ID!):String

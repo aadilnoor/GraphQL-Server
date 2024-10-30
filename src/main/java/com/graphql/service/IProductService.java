@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.management.AttributeNotFoundException;
 
+import com.graphql.dtos.ProductDTO;
 import com.graphql.entity.Product;
 
 public interface IProductService {
@@ -17,4 +18,8 @@ public interface IProductService {
 	Product updateProductStockShipment(int id , int stock);
 	
 	void deleteProductById(int id);
+	
+	Product createProduct(ProductDTO productDTO);
+	
+	Product updateProduct(ProductDTO productDTO,int id) throws AttributeNotFoundException;
 }

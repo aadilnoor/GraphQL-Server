@@ -9,10 +9,10 @@ import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.graphql.dtos.ProductDTO;
 import com.graphql.entity.Product;
 import com.graphql.service.IProductService;
 
@@ -22,6 +22,12 @@ public class ProductController {
 
 	@Autowired
 	private IProductService productService;
+
+	@MutationMapping
+	public Product createProduct(@Argument ProductDTO productDTO) {
+
+		return productService.createProduct(productDTO);
+	}
 
 	@QueryMapping
 	public List<Product> getAllProducts() {
@@ -40,18 +46,22 @@ public class ProductController {
 	public Product updateStock(@Argument int id, @Argument int stock) throws AttributeNotFoundException {
 		return productService.updateStock(id, stock);
 	}
-	
+
 	@MutationMapping
-	public Product updateStockShipment(@Argument int id, @Argument int stock)  {
+	public Product updateStockShipment(@Argument int id, @Argument int stock) {
 		return productService.updateProductStockShipment(id, stock);
 	}
-	
-	
+
 	@MutationMapping
 	public String deleteProductById(@Argument int id) {
 		productService.deleteProductById(id);
 		return "Product Deleted...";
 	}
-	
-	
+
+	@MutationMapping
+	public Product updateProduct(@Argument ProductDTO productDTO, @Argument int id) throws AttributeNotFoundException {
+		Product updateProduct = productService.updateProduct(productDTO, id);
+		return updateProduct;
+	}
+
 }
