@@ -27,10 +27,13 @@ type User {
 }
 
 input UserDTO {
+
+   
   name:String
   phone:String
   email:String
   password:String
+
 }
 
 
@@ -43,6 +46,15 @@ type Order{
 	user:User
 }
 
+input OrderDTO{
+	userID: ID!
+	orderDetails:String
+	address:String
+	price:Float
+	
+
+}
+
 type Query {
 
 	getAllProducts:[Product]
@@ -50,6 +62,11 @@ type Query {
 	
 	getUserById(id:ID!):User
 	getAllUsers:[User]
+	
+	getOrdersByUserId(userId: ID!):[Order]
+	getOrdersByOrderId(orderId:ID!):Order
+	getAllOrders:[Order]
+	
 }
 
 type Mutation{
@@ -65,4 +82,5 @@ type Mutation{
 	updateUser(userDTO:UserDTO, id:ID!):User
 	deleteUser(id:ID!):String
 	
+	saveOrder(orderDTO: OrderDTO):Order
 }
